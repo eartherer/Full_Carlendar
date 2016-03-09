@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='fullcalendar-2.6.1/fullcalendar.css' rel='stylesheet' />
+<link href='fullcalendar-2.6.1/fullcalendar.print.css' rel='stylesheet' media='print' />
+<link href='fullcalendar-scheduler-1.2.1 2/scheduler.css' rel='stylesheet' />
+<script src='fullcalendar-2.6.1/lib/moment.min.js'></script>
+<script src='fullcalendar-2.6.1/lib/jquery.min.js'></script>
+<script src='fullcalendar-2.6.1/fullcalendar.js'></script>
+<script src='fullcalendar-scheduler-1.2.1 2/scheduler.js'></script>
+<script>
+
+	$(function() { // document ready
+
+		$('#calendar').fullCalendar({
+			defaultView: 'agendaDay',
+			defaultDate: '2016-01-07',
+			editable: true,
+			selectable: true,
+			eventLimit: true, // allow "more" link when too many events
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'agendaDay,agendaTwoDay,agendaWeek,month'
+			},
+			views: {
+				agendaTwoDay: {
+					type: 'agenda',
+					duration: { days: 2 },
+
+					// views that are more than a day will NOT do this behavior by default
+					// so, we need to explicitly enable it
+					groupByResource: true
+
+					//// uncomment this line to group by day FIRST with resources underneath
+					//groupByDateAndResource: true
+				}
+			},
+
+			//// uncomment this line to hide the all-day slot
+			//allDaySlot: false,
+
+			resources: [
+			{ id: 'a', title: 'Honda City 2กส129' },
+			{ id: 'b', title: 'Honda City 2กส555', eventColor: 'green' },
+			{ id: 'c', title: 'Toyota Vios คต7687', eventColor: 'orange' },
+			{ id: 'd', title: 'Toyota Vios กก4545', eventColor: 'red' }
+			],
+
+			events: [
+				{ id: '1', resourceId: 'a', start: '2016-01-06', end: '2016-01-08', title: 'Honda City 2กส129' },
+				{ id: '2', resourceId: 'a', start: '2016-01-10', end: '2016-01-15', title: 'Honda City 2กส555' },
+				{ id: '3', resourceId: 'b', start: '2016-01-05', end: '2016-01-20', title: 'Toyota Vios คต7687' },
+				{ id: '4', resourceId: 'c', start: '2016-01-22', end: '2016-01-25', title: 'Toyota Vios คต7687' },
+				{ id: '5', resourceId: 'd', start: '2015-12-25', end: '2016-01-05', title: 'Toyota Vios กก4545' }
+			],
+
+			select: function(start, end, jsEvent, view, resource) {
+				console.log(
+					'select',
+					start.format(),
+					end.format(),
+					resource ? resource.id : '(no resource)'
+				);
+			},
+			dayClick: function(date, jsEvent, view, resource) {
+				console.log(
+					'dayClick',
+					date.format(),
+					resource ? resource.id : '(no resource)'
+				);
+			}
+		});
+	
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 50px auto;
+	}
+
+</style>
+</head>
+<body>
+	<div id='script-warning'>
+		This page should be running from a webserver, to allow fetching from the <code>json/</code> directory.
+	</div>
+	<div id='calendar'></div>
+
+</body>
+</html>

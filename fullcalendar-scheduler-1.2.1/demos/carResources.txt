@@ -1,0 +1,6 @@
+[
+{ id: 'a', title: 'Room A' },
+{ id: 'b', title: 'Room B', eventColor: 'green' },
+{ id: 'c', title: 'Room C', eventColor: 'orange' },
+{ id: 'd', title: 'Room D', eventColor: 'red' }
+]
